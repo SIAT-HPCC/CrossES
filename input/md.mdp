@@ -1,0 +1,44 @@
+integrator               = md
+dt                       = 0.002
+nsteps                   = 500000 ; ;cd
+
+nstxout                 = 50000 ;100ps
+nstvout                 = 50000
+nstfout                 = 50000
+nstenergy               = 50000
+nstlog                  = 500  ;  log要小10psls
+nstxtcout               = 10000; 20ps 
+energygrps              = Protein Non-Protein
+
+nstlist                  = 10
+ns-type                  = Grid
+pbc                      = xyz
+rlist                    = 1.0
+
+coulombtype              = PME
+pme_order                = 4
+fourierspacing           = 0.16
+rcoulomb                 = 1.0
+vdw-type                 = Cut-off
+rvdw                     = 1.0
+
+Tcoupl                   = v-rescale
+tc-grps                  = Protein  Non-Protein
+tau_t                    = 0.1      0.1
+ref_t                    = 300      300
+
+DispCorr                 = EnerPres
+
+Pcoupl                   = Parrinello-Rahman
+Pcoupltype               = Isotropic
+tau_p                    = 2.0
+compressibility          = 4.5e-5
+ref_p                    = 1.0
+
+gen_vel                  = no
+
+constraints              = all-bonds
+continuation             = yes
+constraint_algorithm     = lincs
+lincs_iter               = 1
+lincs_order              = 4
