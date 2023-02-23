@@ -29,14 +29,16 @@ class SMDForce(ForceConstraint):
             force_stay.addParticle(i, [positions[i - 1][0], positions[i - 1][1], positions[i - 1][2]])
         self.force_list.append(force_stay)
 
-        force_mov = CustomExternalForce("k*(x-x0)^2")
+        #force_mov = CustomExternalForce("k*(x-x0)^2")
         if self.constant_force:
-            #force_mov = CustomExternalForce("k*(x-x0)")
+            force_mov = CustomExternalForce("k*(x-x0)")
+            print(" con force")
             force_mov.addGlobalParameter("x0", 0)  #
             force_mov.addGlobalParameter("k", self.k_mov)  #
             for i in self.mov_list:  # add Particle
-                force_mov.addParticle(i, [])  # 为力增加原子
+                force_mov.addParticle(i, [])  # add atom
         else:
+            force_mov = CustomExternalForce("k*(x-x0)^2")
             force_mov.addPerParticleParameter("x0")  #
 
             for i in self.mov_list:
